@@ -54,8 +54,8 @@ jobs:
         fi
         cp -f configs/templates/$TNAME.config .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config
-        sudo ./clear_tree
-        sudo ./build_firmware_modify $TNAME 0
+        sudo /opt/rt-n56u/trunk/clear_tree
+        sudo /opt/rt-n56u/trunk/build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
     - name : Upload packages
       uses: actions/upload-artifact@master

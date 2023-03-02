@@ -40,15 +40,18 @@ jobs:
         fi
         #cd /opt/rt-n56u/toolchain-mipsel
         cd /opt/rt-n56u/toolchain
-        sh dl_toolchain.sh
+        #sh dl_toolchain.sh
+        sh ./clean_sources.sh
+        sh ./build_toolchain.sh        
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
         TNAME: tl_c5-v4
         KERNEL: 3.4
       run: |
-        sudo /opt/rt-n56u/trunk/clear_tree.sh
-        sudo /opt/rt-n56u/trunk/build_firmware_modify.sh
+        cd /opt/rt-n56u/trunk
+        sudo ./clear_tree.sh
+        sudo ./build_firmware_modify.sh
         sudo mv -f images/*.bin /opt/images/
     - name : Upload packages
       uses: actions/upload-artifact@master

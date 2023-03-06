@@ -16,7 +16,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
@@ -35,9 +35,9 @@ jobs:
         KERNEL: 3.4
       run: |
         if [ $KERNEL = "4.4" ] ; then
-        git clone --depth=1 https://github.com/yangqing77/Padavan-KVR.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/yangqing77/Padavan.git /opt/rt-n56u
         else
-        git clone --depth=1 https://github.com/yangqing77/Padavan-KVR.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/yangqing77/Padavan.git /opt/rt-n56u
         fi
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
@@ -57,6 +57,7 @@ jobs:
         sudo /opt/rt-n56u/trunk/clear_tree
         sudo /opt/rt-n56u/trunk/build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
+        ls romfs/bin
     - name : Upload packages
       uses: actions/upload-artifact@master
       if: always()

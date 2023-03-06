@@ -30,20 +30,14 @@ jobs:
         sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
         cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget \
-        autoconf autoconf-archive automake autopoint bison build-essential ca-certificates cmake cpio \
-        curl doxygen fakeroot flex gawk gettext git gperf help2man htop kmod libblkid-dev libc-ares-dev \
-        libcurl4-openssl-dev libdevmapper-dev libev-dev libevent-dev libexif-dev libflac-dev libgmp3-dev \
-        libid3tag0-dev libjpeg-dev libkeyutils-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libogg-dev \
-        libsqlite3-dev libssl-dev libtool libtool-bin libudev-dev libvorbis-dev libxml2-dev locales mc nano pkg-config \
-        ppp-dev python3 python3-docutils texinfo unzip uuid uuid-dev vim wget xxd zlib1g-dev
     - name: Clone source code
       env:
         KERNEL: 3.4
       run: |
         if [ $KERNEL = "4.4" ] ; then
-        git clone --depth=1 https://github.com/yangqing77/Padavan.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/keke1023/Padavan.git /opt/rt-n56u
         else
-        git clone --depth=1 https://github.com/yangqing77/Padavan.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/keke1023/Padavan.git /opt/rt-n56u
         fi
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
@@ -63,7 +57,8 @@ jobs:
         sudo /opt/rt-n56u/trunk/clear_tree
         sudo /opt/rt-n56u/trunk/build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
-        ls romfs/bin
+        find -name *switch*
+        ls /opt/rt-n56u/trunk/romfs/bin
     - name : Upload packages
       uses: actions/upload-artifact@master
       if: always()
